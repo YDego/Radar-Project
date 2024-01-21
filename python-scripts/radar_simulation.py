@@ -23,7 +23,7 @@ def generate_beta(w, mu=1, epsilon=1, sigma=1):
 
 
 def generate_amp_n_phase(alpha, beta, dist_z):
-    phase = beta * dist_z
+    phase = np.multiply(beta, dist_z)
     amp = np.exp(np.multiply(alpha, (-1 * dist_z)))
     return amp, phase
 
