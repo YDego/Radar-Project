@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def plot_graph(x, y, title="title", x_label='x', y_label='y'):
@@ -24,8 +25,8 @@ def plot_amp_n_phase(x, amp, phase, f_start, f_end, df):
     fig.suptitle('Amplitude and Phase Graphs')
     start_idx = int(f_start / df)
     end_idx = int(f_end / df)
-    axs[0].plot(x[start_idx:end_idx], amp[start_idx:end_idx], 'tab:blue')
-    axs[0].set(xlabel='frequency [MHz]', ylabel='Amplitude []')
+    axs[0].plot(x[start_idx:end_idx], 20*np.log(amp)[start_idx:end_idx], 'tab:blue')
+    axs[0].set(xlabel='frequency [MHz]', ylabel='Amplitude [dB]')
 
     axs[1].plot(x[start_idx:end_idx], phase[start_idx:end_idx], 'tab:red')
     axs[1].set(xlabel='frequency [MHz]', ylabel='Phase [rad]')
