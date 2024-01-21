@@ -1,6 +1,7 @@
 import math
 import numpy as np
 from plot_manager import *
+from project_variables import *
 
 
 def generate_sub_function(w, epsilon, sigma):
@@ -46,15 +47,11 @@ def create_impulse_response(amplitude, phase, df, plot=True):
 
 
 if __name__ == "__main__":
+
     # parameters:
-    # sigma = 1     #conductivity
-    # mu = 1        # permeability
-    # epsilon = 1   # permittivity
-    dist_z = 1  # [m]
-    e_0 = 1
-    df = 1
-    f_start = 800  # [MHz]
-    f_end = 1200  # [MHz]
+    epsilon = e_r * e_0
+    mu = mu_r * mu_0
+    sigma = 1
 
     # time and freq lists
     f = np.arange(1, f_end, df)
@@ -62,9 +59,9 @@ if __name__ == "__main__":
     w = 2 * math.pi * f
 
     # amplitude constant propagation
-    alpha = generate_alpha(w)
+    alpha = generate_alpha(w, mu, epsilon, sigma)
     # phase constant propagation
-    beta = generate_beta(w)
+    beta = generate_beta(w, mu, epsilon, sigma)
 
     # phase and amplitude
     amp, phase = generate_amp_n_phase(alpha, beta, dist_z)
