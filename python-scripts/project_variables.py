@@ -1,6 +1,6 @@
 # constants
-e_0 = 8.85e-12
-mu_0 = 1.26e-6
+e_0 = 8.85e-12  # [F/m]
+mu_0 = 1.26e-6  # [N/(A^2)]
 
 # inputs
 dist_z = 1  # [m]
