@@ -41,7 +41,8 @@ def create_impulse_response(amplitude, phase, df, plot=True):
     # Create the time axis
     time_axis = np.linspace(0, len(impulse_response) / df, len(impulse_response), endpoint=False)
 
-    plot_graph(time_axis, impulse_response, 'impulse response over time', 'time [sec]', 'amplitude []')
+    if plot:
+        plot_graph(time_axis, impulse_response, 'impulse response over time', 'time [sec]', 'amplitude []')
 
     return time_axis, impulse_response
 
