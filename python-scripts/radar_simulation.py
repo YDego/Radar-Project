@@ -28,23 +28,19 @@ def generate_amp_n_phase(alpha, beta, dist_z):
     return amp, phase
 
 
-def create_impulse_response(amplitude, phase, df, z_dist=1, plot=True):
+def create_impulse_response(amplitude, phase, t, fs, z_dist=1, plot=True):
     # Convert amplitude and phase to complex numbers in the frequency domain
     complex_spectrum = amplitude * np.exp(np.multiply(phase, 1j))
 
     # Inverse Fourier Transform to obtain the time-domain signal
-    impulse_response = np.fft.ifftshift(np.fft.irfft(complex_spectrum))
-
-    # Adjust for the sampling rate
-    impulse_response /= df
-
-    # Create the time axis
-    time_axis = np.linspace(0, len(impulse_response) / df, len(impulse_response), endpoint=False)
+    # impulse_response = np.fft.ifftshift(np.fft.irfft(complex_spectrum, n=len(t))) / fs
+    impulse_response = np.fft.irfft(complex_spectrum, n=len(t)) / fs
+    print(np.shape(impulse_response))
 
     if plot:
-        plot_graph(time_axis, impulse_response, 'impulse response over time (z = {} [m])'.format(z_dist), 'time [sec]', 'amplitude []')
+        plot_graph(t, impulse_response, 'impulse response over time (z = {} [m])'.format(z_dist), 'time [sec]', 'amplitude []')
 
-    return time_axis, impulse_response
+    return impulse_response
 
 
 if __name__ == "__main__":
@@ -55,8 +51,11 @@ if __name__ == "__main__":
     sigma = 1
 
     # time and freq lists
-    f = np.arange(0, f_end, df)
-    t = np.arange(0, len(f)/df, 1/df)
+    fs = 100.0
+    start_time = 0
+    end_time = 100
+    t = np.linspace(start_time, end_time, num=int(end_time * fs))
+    f = np.fft.fftfreq(n=len(t), d=1/fs)
     w = 2 * math.pi * f
 
     # amplitude constant propagation
@@ -66,10 +65,10 @@ if __name__ == "__main__":
 
     # phase and amplitude
     amp, phase = generate_amp_n_phase(alpha, beta, dist_z)
-    amp = [1] * len(w)
-    plot_amp_n_phase(f, amp, phase, f_start, f_end, df, dist_z)
+    # amp = [1] * len(w)
+    plot_amp_n_phase(w, f, amp, phase, f_start, f_end, fs, dist_z)
 
-    t_new, imp_resp = create_impulse_response(amp, phase, df, dist_z)
+    imp_resp = create_impulse_response(amp, phase, t, fs, dist_z)
 
     # e_y = e_0 * np.multiply(amp, np.cos(wt - phase))
     # plot_graph(t, e_y)
