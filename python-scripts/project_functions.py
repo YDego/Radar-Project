@@ -7,21 +7,21 @@ def generate_sub_function(w, epsilon, sigma):
     return [1 + math.sqrt(1 + (sigma / (max(value, 1e-3) * epsilon)) ** 2) for value in w]
 
 
-def generate_alpha(w, mu=1, epsilon=1, sigma=1):
+def generate_alpha(w):
     sub_function = generate_sub_function(w, epsilon, sigma)
     alpha = [sigma * math.sqrt(mu / (2 * epsilon * max(value, 1e-3))) for value in sub_function]
 
     return alpha
 
 
-def generate_beta(w, mu=1, epsilon=1, sigma=1):
+def generate_beta(w):
     sub_function = generate_sub_function(w, epsilon, sigma)
     beta = [a * (math.sqrt((mu * epsilon / 2) * b)) for a, b in zip(w, sub_function)]
 
     return beta
 
 
-def generate_amp_n_phase(alpha, beta, r, w):
+def generate_amp_n_phase(alpha, beta, w):
     phase = np.multiply(beta, 2 * r)
     amp = np.exp(np.multiply(alpha, (-1 * 2 * r)))
     beta = [np.where(b == 0, 1e-3, b) for b in beta]

@@ -9,13 +9,13 @@ if __name__ == "__main__":
     w = 2 * math.pi * f
 
     # amplitude constant propagation
-    alpha = generate_alpha(w, mu, epsilon, sigma)
+    alpha = generate_alpha(w)
     # phase constant propagation
-    beta = generate_beta(w, mu, epsilon, sigma)
+    beta = generate_beta(w)
 
     # phase and amplitude
-    amp, phase, v_phase = generate_amp_n_phase(alpha, beta, r, w)
-    plot_amp_n_phase(f, amp, phase, f_start, f_end, fs, r)
+    amp, phase, v_phase = generate_amp_n_phase(alpha, beta, w)
+    plot_amp_n_phase(f, amp, phase)
 
     #
     # create_impulse_response(amp, phase, t, w, dist_z)
