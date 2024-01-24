@@ -56,22 +56,20 @@ if __name__ == "__main__":
     sigma = 1
 
     # time and freq lists
-    fs = 100.0
-    start_time = 0
-    end_time = 100
-    t = np.linspace(start_time, end_time, num=int(end_time * fs))
-    f = np.fft.fftfreq(n=len(t), d=1/fs)
+    f = np.fft.fftshift(np.fft.fftfreq(n=N+1, d=1/fs))
     w = 2 * math.pi * f
+
+    print(f)
 
     # amplitude constant propagation
     alpha = generate_alpha(w, mu, epsilon, sigma)
     # phase constant propagation
     beta = generate_beta(w, mu, epsilon, sigma)
 
-    # phase and amplitude
-    amp, phase = generate_amp_n_phase(alpha, beta, dist_z, f, f_start, f_end, fs)
-
-    create_impulse_response(amp, phase, t, w, dist_z)
-
-    # e_y = e_0 * np.multiply(amp, np.cos(wt - phase))
-    # plot_graph(t, e_y)
+    # # phase and amplitude
+    # amp, phase = generate_amp_n_phase(alpha, beta, dist_z, f, f_start, f_end, fs)
+    #
+    # create_impulse_response(amp, phase, t, w, dist_z)
+    #
+    # # e_y = e_0 * np.multiply(amp, np.cos(wt - phase))
+    # # plot_graph(t, e_y)
