@@ -12,15 +12,6 @@ def plot_graph(x, y, title="title", x_label='x', y_label='y'):
     plt.show()
 
 
-def plot_mult_graph(x, y, title, x_labels, y_labels, num_of_plot):
-    plt.figure()
-    fig, axs = plt.subplots(num_of_plot)
-    fig.suptitle(title)
-    for i in range(num_of_plot):
-        axs[i].plot(x[i], y[i])
-        axs[i].set(xlabel=x_labels[i], ylabel=y_labels[i])
-
-
 def plot_amp_n_phase(f, amp, phase):
     fig, axs = plt.subplots(2)
     fig.suptitle('Amplitude and Phase Graphs (z={}[m])'.format(r))
