@@ -23,10 +23,10 @@ def generate_beta(w):
 
 def generate_amp_n_phase(w, alpha, beta):
     phase = np.multiply(beta, 2 * r)
-    amp = np.exp(np.multiply(alpha, (-1 * 2 * r)))
+    # amp = np.exp(np.multiply(alpha, (-1 * 2 * r)))
+    amp = [1] * len(alpha)
     beta = [np.where(b == 0, 1e-3, b) for b in beta]
     v_phase = np.divide(w, beta)
-    # amp = [1] * len(alpha)
 
     return amp, phase, v_phase
 
