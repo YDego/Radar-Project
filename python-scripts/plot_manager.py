@@ -1,5 +1,3 @@
-import math
-
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -22,9 +20,9 @@ def plot_mult_graph(x, y, title, x_labels, y_labels, num_of_plot):
         axs[i].set(xlabel=x_labels[i], ylabel=y_labels[i])
 
 
-def plot_amp_n_phase(f, amp, phase, f_start, f_end, fs, z_dist):
+def plot_amp_n_phase(f, amp, phase, f_start, f_end, fs, r):
     fig, axs = plt.subplots(2)
-    fig.suptitle('Amplitude and Phase Graphs (z={}[m])'.format(z_dist))
+    fig.suptitle('Amplitude and Phase Graphs (z={}[m])'.format(r))
 
     f_start_idx = int(f_start / fs)
     f_end_idx = int(f_end / fs)

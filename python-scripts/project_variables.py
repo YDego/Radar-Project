@@ -3,6 +3,9 @@ e_0 = 8.85e-12  # [F/m]
 mu_0 = 1.26e-6  # [N/(A^2)]
 e_r = 1
 mu_r = 1
+sigma = 1e3  # conductivity [S/m]
+epsilon = e_r * e_0
+mu = mu_r * mu_0
 
 # inputs
 r = 1e1  # target distance [m]
