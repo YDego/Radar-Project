@@ -21,7 +21,7 @@ def generate_beta(w):
     return beta
 
 
-def generate_amp_n_phase(alpha, beta, w):
+def generate_amp_n_phase(w, alpha, beta):
     phase = np.multiply(beta, 2 * r)
     amp = np.exp(np.multiply(alpha, (-1 * 2 * r)))
     beta = [np.where(b == 0, 1e-3, b) for b in beta]

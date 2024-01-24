@@ -14,10 +14,9 @@ if __name__ == "__main__":
     beta = generate_beta(w)
 
     # phase and amplitude
-    amp, phase, v_phase = generate_amp_n_phase(alpha, beta, w)
+    amp, phase, v_phase = generate_amp_n_phase(w, alpha, beta)
     plot_amp_n_phase(f, amp, phase)
 
-    #
     # create_impulse_response(amp, phase, t, w, dist_z)
     #
     # # e_y = e_0 * np.multiply(amp, np.cos(wt - phase))

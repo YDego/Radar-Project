@@ -25,13 +25,14 @@ def plot_amp_n_phase(f, amp, phase):
     fig, axs = plt.subplots(2)
     fig.suptitle('Amplitude and Phase Graphs (z={}[m])'.format(r))
 
-    f_start_idx = int(N/2-1)
-    f_end_idx = int(N)
+    half_n = int(N/2)
+    start_idx = int()
+    end_idx = int(N)
 
-    axs[0].plot(f[f_end_idx/2:f_end_idx], 20*np.log(amp)[f_start_idx:f_end_idx], 'tab:blue')
+    axs[0].plot(f[start_idx:end_idx], 20*np.log(amp)[start_idx:end_idx], 'tab:blue')
     axs[0].set(xlabel='frequency [MHz]', ylabel='Amplitude [dB]')
 
-    axs[1].plot(f[f_start_idx:f_end_idx], phase[f_start_idx:f_end_idx], 'tab:red')
+    axs[1].plot(f[start_idx:end_idx], phase[start_idx:end_idx], 'tab:red')
     axs[1].set(xlabel='frequency [MHz]', ylabel='Phase [rad]')
 
     plt.show()
