@@ -22,20 +22,23 @@ def generate_beta(w, mu=1, epsilon=1, sigma=1):
     return beta
 
 
-def generate_amp_n_phase(alpha, beta, dist_z):
-    phase = np.multiply(beta, dist_z)
-    amp = np.exp(np.multiply(alpha, (-1 * dist_z)))
+def generate_amp_n_phase(alpha, beta, dist_z, f, f_start, f_end, fs, plot=True):
+    phase = np.multiply(beta, 2 * dist_z)
+    # amp = np.exp(np.multiply(alpha, (-1 * 2 * dist_z)))
+    amp = [1] * len(alpha)
+    if plot:
+        plot_amp_n_phase(f, amp, phase, f_start, f_end, fs, dist_z)
+
     return amp, phase
 
 
 def create_impulse_response(amplitude, phase, t, fs, z_dist=1, plot=True):
-    # Convert amplitude and phase to complex numbers in the frequency domain
-    complex_spectrum = amplitude * np.exp(np.multiply(phase, 1j))
+    # amplitude and phase at t=0
+    E_y = amplitude * np.cos(phase)
 
     # Inverse Fourier Transform to obtain the time-domain signal
-    # impulse_response = np.fft.ifftshift(np.fft.irfft(complex_spectrum, n=len(t))) / fs
-    impulse_response = np.fft.irfft(complex_spectrum, n=len(t)) / fs
-    print(np.shape(impulse_response))
+    # impulse_response = np.fft.ifftshift(np.fft.irfft(E_y, n=len(t))) / fs
+    impulse_response = np.fft.ifft(E_y, n=len(t))
 
     if plot:
         plot_graph(t, impulse_response, 'impulse response over time (z = {} [m])'.format(z_dist), 'time [sec]', 'amplitude []')
@@ -64,9 +67,7 @@ if __name__ == "__main__":
     beta = generate_beta(w, mu, epsilon, sigma)
 
     # phase and amplitude
-    amp, phase = generate_amp_n_phase(alpha, beta, dist_z)
-    # amp = [1] * len(w)
-    plot_amp_n_phase(w, f, amp, phase, f_start, f_end, fs, dist_z)
+    amp, phase = generate_amp_n_phase(alpha, beta, dist_z, f, f_start, f_end, fs)
 
     imp_resp = create_impulse_response(amp, phase, t, fs, dist_z)
 
