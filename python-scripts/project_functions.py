@@ -21,27 +21,21 @@ def generate_beta(w):
     return beta
 
 
-def generate_amp_n_phase(w, alpha, beta):
+def generate_amp_n_phase(alpha, beta):
     phase = np.multiply(beta, 2 * r)
     # amp = np.exp(np.multiply(alpha, (-1 * 2 * r)))
     amp = [1] * len(alpha)
-    beta = [np.where(b == 0, 1e-5, b) for b in beta]
-    v_phase = np.divide(w, beta)
+    # beta = [np.where(b == 0, 1e-5, b) for b in beta]
+    # v_phase = np.divide(w, beta)
 
-    return amp, phase, v_phase
+    return amp, phase
 
 
-def create_impulse_response(amplitude, phase, t, w, z_dist=1, plot=True):
-    t_list = np.array(range(5)) * 5
-    for t_time in t_list:
-        # amplitude and phase at t
-        E_y = amplitude * np.cos(np.multiply(w, t_time) + phase)
-
-        n = len(t)
-        half_n = int(n/2)
-        # Inverse Fourier Transform to obtain the time-domain signal
-        impulse_response = np.fft.ifftshift(np.fft.irfft(E_y, n=n))
-        # impulse_response = np.abs(np.fft.ifft(E_y, n=n))
-
-        if plot:
-            plot_graph(t[:half_n], impulse_response[half_n:], 'impulse response over time (z = {} [m])'.format(z_dist), 'time [sec]', 'amplitude []')
+def create_impulse_response(amplitude, phase, t):
+    freq_response = amplitude * np.exp(1j * phase)
+    flipped = np.flip(np.conj(freq_response))
+    imp_response = np.concatenate((flipped, freq_response))
+    inv = np.fft.ifft(imp_response, n=N)
+    # inv_img = np.imag(np.fft.ifft(imp_response, n=2*N+1))
+    plot_graph(t, inv)
+    # plot_graph(t, inv_img)

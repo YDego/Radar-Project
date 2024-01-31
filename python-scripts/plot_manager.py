@@ -16,7 +16,7 @@ def plot_amp_n_phase(f, amp, phase):
     fig, axs = plt.subplots(2)
     fig.suptitle('Amplitude and Phase Graphs (z={}[m])'.format(r))
 
-    half_n = int(N/2) + 1
+    half_n = int(N/2)
     f = f[half_n:]
     amp = amp[half_n:]
     phase = phase[half_n:]
