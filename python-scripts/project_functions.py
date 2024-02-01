@@ -33,9 +33,8 @@ def generate_amp_n_phase(alpha, beta):
 
 def create_impulse_response(amplitude, phase, t):
     freq_response = amplitude * np.exp(1j * phase)
-    flipped = np.flip(np.conj(freq_response))
-    imp_response = np.concatenate((flipped, freq_response))
-    inv = np.fft.ifft(imp_response, n=N)
-    # inv_img = np.imag(np.fft.ifft(imp_response, n=2*N+1))
-    plot_graph(t, inv)
+
+    imp_response = np.fft.irfft(freq_response)
+    # inv_img = np.imag(np.fft.ifft(full_freq_response, n=2*N+1))
+    plot_graph(t, imp_response)
     # plot_graph(t, inv_img)

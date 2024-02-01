@@ -8,7 +8,7 @@ epsilon = e_r * e_0
 mu = mu_r * mu_0
 
 # inputs
-r = 1e1             # target distance [m]
+r = 5               # target distance [m]
 
 BANDWIDTH = 2e9     # 2[GHz]
 fs = 2 * BANDWIDTH  # sample rate

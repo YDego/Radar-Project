@@ -5,7 +5,7 @@ from project_functions import *
 if __name__ == "__main__":
 
     # time and freq lists
-    f = np.fft.fftshift(np.fft.fftfreq(n=N, d=1/fs))
+    f = np.fft.rfftfreq(n=N, d=1/fs)
     w = 2 * math.pi * f
     t = np.arange(N) / fs
 
