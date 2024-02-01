@@ -22,7 +22,7 @@ def generate_beta(w):
 
 
 def generate_amp_n_phase(alpha, beta):
-    phase = np.multiply(beta, 2 * r)
+    phase = np.multiply(beta, 2 * r) % 180
     # amp = np.exp(np.multiply(alpha, (-1 * 2 * r)))
     amp = [1] * len(alpha)
     # beta = [np.where(b == 0, 1e-5, b) for b in beta]

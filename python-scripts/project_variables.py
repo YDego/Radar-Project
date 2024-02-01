@@ -1,9 +1,9 @@
 # constants & system parameters
 e_0 = 8.85e-12      # [F/m]
 mu_0 = 1.26e-6      # [N/(A^2)]
-e_r = 1
+e_r = 2/3
 mu_r = 1
-sigma = 1e3         # conductivity [S/m]
+sigma = 5.96e7      # conductivity [S/m]
 epsilon = e_r * e_0
 mu = mu_r * mu_0
 
