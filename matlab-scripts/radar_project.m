@@ -32,10 +32,9 @@ w = 2*pi*f;
 % Calculate amplitude and phase
 [amp, phase] = generate_amp_n_phase(w, sigma, mu, epsilon, r);
 
-% Filter frequency, amplitude, and phase within the specified range
-f_filtered = f(cut_indices);
-amp_filtered = amp(cut_indices);
-phase_filtered = phase(cut_indices);
+% Find indices where freq is within the specified range
+cut_indices = (f >= f_start) & (f <= f_end);
+
 
 % Plot the original and filtered amplitude vs frequency
 figure;
@@ -46,7 +45,7 @@ ylabel('Amplitude');
 title('Original Amplitude vs Frequency');
 
 subplot(2, 2, 2);
-plot(f_filtered, amp_filtered);
+plot(f(cut_indices), amp(cut_indices));
 xlabel('Frequency (Hz)');
 ylabel('Amplitude');
 title('Amplitude vs Frequency zoom in');
@@ -59,15 +58,12 @@ ylabel('Phase (radians)');
 title('Original Phase vs Frequency');
 
 subplot(2, 2, 4);
-plot(f_filtered, phase_filtered);
+plot(f(cut_indices), phase(cut_indices));
 xlabel('Frequency (Hz)');
 ylabel('Phase (radians)');
 title('Phase vs Frequency zoom in');
 
 %% impulse response
-
-% Find indices where freq is within the specified range
-cut_indices = (f >= f_start) & (f <= f_end);
 
 freq_response = amp .* exp(1j * phase);
 freq_response(~cut_indices) = 0;
