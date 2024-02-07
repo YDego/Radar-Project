@@ -73,14 +73,14 @@ imp_response = ifft(freq_response, 'symmetric');
 % Plot frequency response and impulse response next to each other
 figure;
 subplot(1, 2, 1);
-plot(f, abs(freq_response));
-xlabel('Frequency (Hz)');
+plot(f*1e-9, abs(freq_response));
+xlabel('Frequency (GHz)');
 ylabel('Magnitude');
 title('Frequency Response');
 
 subplot(1, 2, 2);
-plot(t, imp_response);
-xlabel('Time (s)');
+plot(t*1e6, imp_response);
+xlabel('Time (ms)');
 ylabel('Amplitude');
 title('Impulse Response');
 
