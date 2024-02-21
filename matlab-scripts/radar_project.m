@@ -21,10 +21,10 @@ f_end = 1.2e9;          % [Hz]
 
 % inputs
 r = 5;                  % target distance [m]
-N = 2048;               % window size [samples]
+N = 1024;               % window size [samples]
 
 %% time & freq vectors
-t = linspace(0, N/fs, N);
+t = 0:1/fs:1/fs*(N-1);
 f = linspace(0, BW, N);
 w = 2*pi*f;
 
@@ -83,13 +83,4 @@ plot(t*1e6, imp_response);
 xlabel('Time (ms)');
 ylabel('Amplitude');
 title('Impulse Response');
-
-
-%% connect to network analyzer
-
-ip_address = '192.168.0.3';
-
-net_analyzer = visadev('TCPIP0::192.168.0.3');
-write(net_analyzer, "*IDN?")
-print(readline(net_analyzer))
 
