@@ -6,8 +6,7 @@ function [amp, phase] = generate_amp_n_phase(w, sigma, mu, epsilon, r)
     beta = w .* sqrt((mu * epsilon / 2) * max(sub_function, 1e-3));
 
     phase = -beta .* (2 * r);
-    % phase = mod(phase, 2*pi);
-    % amp = exp(-alpha *  2 * r);
-    amp = ones(size(alpha));  % amp is 1
+    amp = exp(-alpha *  2 * r);
+%     amp = ones(size(alpha));  % amp is 1
 
 end
